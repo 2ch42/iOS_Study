@@ -18,6 +18,8 @@
 		E202A1052C8AF4430098CBB2 /* MyMemoAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202A1042C8AF4430098CBB2 /* MyMemoAppUITestsLaunchTests.swift */; };
 		E202A1122C8AF4AA0098CBB2 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */; };
 		E202A1142C8AF5870098CBB2 /* MemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202A1132C8AF5870098CBB2 /* MemoData.swift */; };
+		E2FE242A2C8D7C8D00435851 /* MemoDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */; };
+		E2FE242C2C8D7DB700435851 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		E202A1042C8AF4430098CBB2 /* MyMemoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
 		E202A1132C8AF5870098CBB2 /* MemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoData.swift; sourceTree = "<group>"; };
+		E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MemoDetail.storyboard; sourceTree = "<group>"; };
+		E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				E202A0E12C8AF4420098CBB2 /* AppDelegate.swift */,
 				E202A0E32C8AF4420098CBB2 /* SceneDelegate.swift */,
 				E202A0E52C8AF4420098CBB2 /* MemoListViewController.swift */,
+				E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */,
+				E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */,
 				E202A0E72C8AF4420098CBB2 /* Main.storyboard */,
 				E202A1132C8AF5870098CBB2 /* MemoData.swift */,
 				E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */,
@@ -238,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E202A0EB2C8AF4430098CBB2 /* Assets.xcassets in Resources */,
+				E2FE242A2C8D7C8D00435851 /* MemoDetail.storyboard in Resources */,
 				E202A0EE2C8AF4430098CBB2 /* Base in Resources */,
 				E202A0E92C8AF4420098CBB2 /* Base in Resources */,
 			);
@@ -265,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E202A0E62C8AF4420098CBB2 /* MemoListViewController.swift in Sources */,
+				E2FE242C2C8D7DB700435851 /* MemoDetailViewController.swift in Sources */,
 				E202A0E22C8AF4420098CBB2 /* AppDelegate.swift in Sources */,
 				E202A0E42C8AF4420098CBB2 /* SceneDelegate.swift in Sources */,
 				E202A1122C8AF4AA0098CBB2 /* MemoCell.swift in Sources */,

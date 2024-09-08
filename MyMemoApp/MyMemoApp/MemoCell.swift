@@ -13,15 +13,15 @@ class MemoCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
 
-
+    @IBOutlet weak var edgeView: UIView!
+    
     override func awakeFromNib() {
 
         super.awakeFromNib()
-        self.layer.cornerRadius = 10
+        edgeView.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
     func configure(_ memo: Memo) {

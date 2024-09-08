@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct Memo {
+class Memo {
     var date: Date
     var description: String
+    
+    init(date: Date, description: String) {
+        self.date = date
+        self.description = description
+    }
 }
 
 extension Memo {
@@ -41,9 +46,18 @@ extension Memo {
     ]
 }
 
-extension Memo: Hashable, Comparable {
+extension Memo: Hashable, Comparable, Equatable {
+    static func == (lhs: Memo, rhs: Memo) -> Bool {
+        lhs.date == rhs.date && lhs.description == rhs.description ? true : false
+    }
+    
     static func < (lhs: Memo, rhs: Memo) -> Bool {
         lhs.date < rhs.date ? false: true
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(date)
+        hasher.combine(description)
     }
 }
 
