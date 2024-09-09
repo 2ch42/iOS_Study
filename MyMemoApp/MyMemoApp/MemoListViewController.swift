@@ -54,6 +54,11 @@ class MemoListViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
         vc.memo = newMemo
         vc.memoList  = list
+        vc.deleteEmpty = { [self] memo in
+            if let index = self.list.firstIndex(of: memo) {
+                self.list.remove(at: index)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +77,7 @@ extension MemoListViewController: UITableViewDataSource {
             print("Failed casting to MemoCell")
             return UITableViewCell()
         }
-        
+
         cell.configure(list[indexPath.item])
         return cell
     }
@@ -90,7 +95,6 @@ extension MemoListViewController: UITableViewDataSource {
         }
         return UISwipeActionsConfiguration(actions: [delButton])
     }
-    
 }
 
 extension MemoListViewController: UITableViewDelegate {
@@ -100,5 +104,10 @@ extension MemoListViewController: UITableViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
         vc.memo = list[indexPath.item]
         vc.memoList = list
+        vc.deleteEmpty = { [self] memo in
+            if let index = self.list.firstIndex(of: memo) {
+                self.list.remove(at: index)
+            }
+        }
     }
 }
