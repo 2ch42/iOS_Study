@@ -27,7 +27,6 @@ class MemoDetailViewController: UIViewController {
         if (memo.description != textView.text) {
             memo.description = textView.text
             memo.date = Date()
-            
         }
     }
 }

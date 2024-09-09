@@ -11,11 +11,16 @@ class MemoListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var toolBar: UIToolbar!
+
     var list: [Memo] = Memo.sampleList.sorted()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
+
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -23,11 +28,22 @@ class MemoListViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .black
-        let addItemButton = UIBarButtonItem(title: "new", style: .plain, target: self, action: #selector(addNewItem))
-        navigationItem.rightBarButtonItem = addItemButton
+
+        let listOptionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = listOptionButton
         
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
+        let newMemoButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(addNewItem))
+        
+        let toolBarSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        let memoCountsText = UIBarButtonItem(title: "\(list.count)개의 메모", style: .plain, target: self, action: nil)
+        memoCountsText.tintColor = .white
+
+        toolBar.tintColor = .systemYellow
+        toolBar.isTranslucent = false
+        toolBar.barTintColor = .black
+        toolBar.backgroundColor = .black
+        toolBar.setItems([toolBarSpace, memoCountsText, toolBarSpace, newMemoButton], animated: true)
     }
     
     @objc func addNewItem() {
@@ -68,7 +84,7 @@ extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delButton = UIContextualAction(style: .destructive, title: "delete") { [self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+        let delButton = UIContextualAction(style: .destructive, title: "삭제") { [self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             list.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
