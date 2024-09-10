@@ -47,14 +47,17 @@ class MemoListViewController: UIViewController {
     }
     
     @objc func addNewItem() {
+
         let newMemo = Memo(date: Date(), description: "")
         list.append(newMemo)
+
         let storyboard = UIStoryboard(name: "MemoDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MemoDetailViewController") as! MemoDetailViewController
         navigationController?.pushViewController(vc, animated: true)
+
         vc.memo = newMemo
         vc.memoList  = list
-        vc.deleteEmpty = { [self] memo in
+        vc.deleteEmpty = { [unowned self] memo in
             if let index = self.list.firstIndex(of: memo) {
                 self.list.remove(at: index)
             }
@@ -89,7 +92,7 @@ extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delButton = UIContextualAction(style: .destructive, title: "삭제") { [self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+        let delButton = UIContextualAction(style: .destructive, title: "삭제") { [unowned self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             list.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -98,13 +101,16 @@ extension MemoListViewController: UITableViewDataSource {
 }
 
 extension MemoListViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         let storyboard = UIStoryboard(name: "MemoDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MemoDetailViewController") as! MemoDetailViewController
         navigationController?.pushViewController(vc, animated: true)
+
         vc.memo = list[indexPath.item]
         vc.memoList = list
-        vc.deleteEmpty = { [self] memo in
+        vc.deleteEmpty = { [unowned self] memo in
             if let index = self.list.firstIndex(of: memo) {
                 self.list.remove(at: index)
             }

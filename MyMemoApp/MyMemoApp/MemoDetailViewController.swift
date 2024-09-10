@@ -19,7 +19,6 @@ class MemoDetailViewController: UIViewController {
         super.viewDidLoad()
 
         textView.text = memo.description
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
