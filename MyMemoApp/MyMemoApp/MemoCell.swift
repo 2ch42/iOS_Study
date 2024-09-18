@@ -24,8 +24,8 @@ class MemoCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
     }
 
-    func configure(_ memo: Memo) {
-        self.dateLabel.text = memo.date.formatted()
-        self.descriptionLabel.text = memo.description
+    func configure(_ memo: MemoDummies) {
+        self.dateLabel.text = memo.date!.formatted()
+        self.descriptionLabel.text = memo.content
     }
 }

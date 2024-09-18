@@ -6,32 +6,30 @@
 //
 
 import UIKit
+import CoreData
 
 class MemoDetailViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     
-    var memo: Memo = Memo(date: Date(), description: "Temp")
-    var memoList: [Memo] = []
-    var deleteEmpty: ((Memo) -> ()) = { memo in }
+    var memo: MemoDummies? = nil
+    
+    var afterUnload: (MemoDummies?, String) -> () = { memo, content in }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textView.text = memo.description
+        textView.text = memo?.content ?? ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
 
         super.viewWillDisappear(animated)
 
-        if (memo.description != textView.text) {
-            memo.description = textView.text
-            memo.date = Date()
+        if self.textView.text == "" {
+            memo!.content = self.textView.text
         }
-
-        if (memo.description == "") {
-            deleteEmpty(memo)
-        }
+        
+        afterUnload(memo, self.textView.text)
     }
 }
