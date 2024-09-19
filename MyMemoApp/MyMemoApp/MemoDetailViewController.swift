@@ -27,7 +27,9 @@ class MemoDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         if self.textView.text == "" {
-            memo!.content = self.textView.text
+            if memo != nil {
+                memo!.content = self.textView.text
+            }
         }
         
         afterUnload(memo, self.textView.text)

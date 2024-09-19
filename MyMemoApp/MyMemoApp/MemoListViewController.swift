@@ -64,6 +64,9 @@ class MemoListViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "MemoDetailViewController") as! MemoDetailViewController
         navigationController?.pushViewController(vc, animated: true)
         vc.afterUnload = { [unowned self] memo, content in
+            if content == "" {
+                return
+            }
             self.createData(content)
             self.list = readData()
             self.tableView.insertRows(at: [IndexPath(row: list.count - 1, section: 0)], with: .none)
