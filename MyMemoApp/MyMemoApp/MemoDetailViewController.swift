@@ -47,6 +47,18 @@ class MemoDetailViewController: UIViewController {
   
   func setMenuItems() {
     
+    menuItems[2] = UIAction(title: "줄 및 격자", image: UIImage(systemName: "rectangle.split.3x3"), handler: { [weak self] _ in
+
+      guard let self = self else {
+        return
+      }
+
+      let storyboard = UIStoryboard(name: "LineGridModal", bundle: nil)
+      let vc = storyboard.instantiateViewController(withIdentifier: "LineGridViewController")
+      vc.modalPresentationStyle = .popover
+      self.present(vc, animated: true)
+      return
+    })
     
     let backgroundActionTitle: String
     let backgroundActionImage: UIImage?
