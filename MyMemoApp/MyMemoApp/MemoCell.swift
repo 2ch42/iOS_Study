@@ -8,24 +8,24 @@
 import UIKit
 
 class MemoCell: UITableViewCell {
-
-    @IBOutlet weak var dateLabel: UILabel!
-
-    @IBOutlet weak var descriptionLabel: UILabel!
-
-    @IBOutlet weak var edgeView: UIView!
+  
+  @IBOutlet weak var dateLabel: UILabel!
+  
+  @IBOutlet weak var descriptionLabel: UILabel!
+  
+  @IBOutlet weak var edgeView: UIView!
+  
+  override func awakeFromNib() {
     
-    override func awakeFromNib() {
-
-        super.awakeFromNib()
-        edgeView.layer.cornerRadius = 10
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-    }
-
-    func configure(_ memo: MemoDummies) {
-        self.dateLabel.text = memo.date!.formatted()
-        self.descriptionLabel.text = memo.content
-    }
+    super.awakeFromNib()
+    edgeView.layer.cornerRadius = 10
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+  }
+  
+  func configure(_ memo: MemoDummies) {
+    self.dateLabel.text = memo.date!.formatted()
+    self.descriptionLabel.text = memo.content
+  }
 }

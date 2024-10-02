@@ -26,9 +26,17 @@
                                 <rect key="frame" x="16" y="0.0" width="361" height="719"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="e4M-98-1eI">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="BYZ-38-t0r" id="EEY-jk-MFv"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemoCell" rowHeight="153" id="1Bi-6V-86m" customClass="MemoCell" customModule="MyMemoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="361" height="153"/>
+                                        <rect key="frame" x="0.0" y="94" width="361" height="153"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Bi-6V-86m" id="wvM-au-4OT">
                                             <rect key="frame" x="0.0" y="0.0" width="361" height="153"/>
@@ -97,6 +105,7 @@
                     <navigationItem key="navigationItem" title="메모" id="VMx-HP-lKV"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchBar" destination="e4M-98-1eI" id="AKI-l6-8Nw"/>
                         <outlet property="tableView" destination="Mpe-HC-M31" id="dLu-J9-DMZ"/>
                         <outlet property="toolBar" destination="V29-aU-pbE" id="y4a-UZ-OzQ"/>
                     </connections>

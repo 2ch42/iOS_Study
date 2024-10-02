@@ -19,6 +19,7 @@
 		E202A1122C8AF4AA0098CBB2 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */; };
 		E202A1142C8AF5870098CBB2 /* MemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E202A1132C8AF5870098CBB2 /* MemoData.swift */; };
 		E202B8AE2C98458D00ED347A /* MemoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E202B8AC2C98458D00ED347A /* MemoDataModel.xcdatamodeld */; };
+		E2D398A42CA95E8A0049ED9B /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D398A32CA95E8A0049ED9B /* MenuItems.swift */; };
 		E2FE242A2C8D7C8D00435851 /* MemoDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */; };
 		E2FE242C2C8D7DB700435851 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
 		E202A1132C8AF5870098CBB2 /* MemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoData.swift; sourceTree = "<group>"; };
 		E202B8AD2C98458D00ED347A /* MemoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoDataModel.xcdatamodel; sourceTree = "<group>"; };
+		E2D398A32CA95E8A0049ED9B /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 		E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MemoDetail.storyboard; sourceTree = "<group>"; };
 		E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				E202A0E52C8AF4420098CBB2 /* MemoListViewController.swift */,
 				E2FE24292C8D7C8D00435851 /* MemoDetail.storyboard */,
 				E2FE242B2C8D7DB700435851 /* MemoDetailViewController.swift */,
+				E2D398A32CA95E8A0049ED9B /* MenuItems.swift */,
 				E202A0E72C8AF4420098CBB2 /* Main.storyboard */,
 				E202A1132C8AF5870098CBB2 /* MemoData.swift */,
 				E202A1112C8AF4AA0098CBB2 /* MemoCell.swift */,
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E202A0E62C8AF4420098CBB2 /* MemoListViewController.swift in Sources */,
+				E2D398A42CA95E8A0049ED9B /* MenuItems.swift in Sources */,
 				E2FE242C2C8D7DB700435851 /* MemoDetailViewController.swift in Sources */,
 				E202A0E22C8AF4420098CBB2 /* AppDelegate.swift in Sources */,
 				E202B8AE2C98458D00ED347A /* MemoDataModel.xcdatamodeld in Sources */,
@@ -460,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 876W82FDBV;
@@ -477,6 +482,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.MyMemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 876W82FDBV;
@@ -505,6 +512,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.MyMemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
