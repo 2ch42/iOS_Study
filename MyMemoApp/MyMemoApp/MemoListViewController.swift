@@ -15,7 +15,7 @@ class MemoListViewController: UIViewController {
   @IBOutlet weak var toolBar: UIToolbar!
   
   @IBOutlet weak var searchBar: UISearchBar!
-
+  
   var persistentContainer: NSPersistentContainer? {
     (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
   }
@@ -32,7 +32,7 @@ class MemoListViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     list = readData()
     //        list.sort { lhs, rhs in
     //            return rhs.date! < lhs.date!
@@ -46,7 +46,7 @@ class MemoListViewController: UIViewController {
     tableView.delegate = self
     
     searchBar.delegate = self
-
+    
     
     navigationController?.navigationBar.tintColor = .systemYellow
     navigationController?.navigationBar.backgroundColor = .black
@@ -54,7 +54,7 @@ class MemoListViewController: UIViewController {
     navigationController?.navigationBar.barTintColor = .black
     
     let listOptionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: nil)
-
+    
     listOptionButton.menu = menu
     navigationItem.rightBarButtonItem = listOptionButton
     
@@ -156,7 +156,7 @@ extension MemoListViewController: UITableViewDataSource {
     isFiltered ? cell.configure(filteredList[indexPath.item]) : cell.configure(list[indexPath.item])
     return cell
   }
-
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     isFiltered ? filteredList.count : list.count
   }
@@ -221,7 +221,7 @@ extension MemoListViewController: UISearchBarDelegate {
     self.tableView.reloadData()
     self.toolBar.isHidden = false
   }
-
+  
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     self.filteredList = []
     searchBar.showsCancelButton = true
@@ -238,14 +238,14 @@ extension MemoListViewController: UISearchBarDelegate {
     let text = searchText.lowercased()
     self.filteredList = self.list.filter { $0.content?.localizedCaseInsensitiveContains(text) ?? true
     }
-      self.tableView.reloadData()
+    self.tableView.reloadData()
   }
   
-//  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//    self.list = self.list.filter { MemoDummies in
-//      return MemoDummies.content?.contains(searchText) != nil ? true : false
-//    }
-//  }
+  //  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+  //    self.list = self.list.filter { MemoDummies in
+  //      return MemoDummies.content?.contains(searchText) != nil ? true : false
+  //    }
+  //  }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     guard let text = searchBar.text?.lowercased() else { return }

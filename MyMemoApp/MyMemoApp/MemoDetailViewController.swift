@@ -59,6 +59,18 @@ class MemoDetailViewController: UIViewController {
       self.present(vc, animated: true)
       return
     })
+
+    let subAction1 = UIAction(title: "모두 작게 설정", handler: { UIAction in
+      return
+    })
+    
+    let subAction2 = UIAction(title: "모두 작게 설정", handler: { UIAction in
+      return
+    })
+    
+    let menu3 = UIMenu(title: "첨부 파일 보기", image: UIImage(systemName: "rectangle.3.group"), children: [subAction1, subAction2])
+    
+    self.menu = UIMenu(title: "", options: [], children: [menuItems[0], menuItems[1], menuItems[2], menu3, menuItems[4], menuItems[5]])
     
     let backgroundActionTitle: String
     let backgroundActionImage: UIImage?
