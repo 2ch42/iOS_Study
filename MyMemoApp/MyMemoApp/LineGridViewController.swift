@@ -40,21 +40,21 @@ class LineGridViewController: UIViewController {
     }
 
     imgViews[0].topAnchor.constraint(equalTo: self.helpLabel.bottomAnchor, constant: 30).isActive = true
-    imgViews[0].leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: 10).isActive = true
+    imgViews[0].leadingAnchor.constraint(equalTo: self.innerView.leadingAnchor, constant: 10).isActive = true
     imgViews[1].topAnchor.constraint(equalTo: imgViews[0].bottomAnchor, constant: 20).isActive = true
-    imgViews[1].leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: 10).isActive = true
+    imgViews[1].leadingAnchor.constraint(equalTo: self.innerView.leadingAnchor, constant: 10).isActive = true
     imgViews[2].topAnchor.constraint(equalTo: imgViews[1].bottomAnchor, constant: 20).isActive = true
-    imgViews[2].leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: 10).isActive = true
+    imgViews[2].leadingAnchor.constraint(equalTo: self.innerView.leadingAnchor, constant: 10).isActive = true
     imgViews[3].topAnchor.constraint(equalTo: imgViews[2].bottomAnchor, constant: 20).isActive = true
-    imgViews[3].leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: 10).isActive = true
+    imgViews[3].leadingAnchor.constraint(equalTo: self.innerView.leadingAnchor, constant: 10).isActive = true
     imgViews[3].bottomAnchor.constraint(greaterThanOrEqualTo: self.innerView.bottomAnchor, constant: -30).isActive = true
     //
     imgViews[4].centerYAnchor.constraint(equalTo: imgViews[1].centerYAnchor).isActive = true
-    imgViews[4].rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -10).isActive = true
+    imgViews[4].trailingAnchor.constraint(equalTo: self.innerView.trailingAnchor, constant: -10).isActive = true
     imgViews[5].centerYAnchor.constraint(equalTo: imgViews[2].centerYAnchor).isActive = true
-    imgViews[5].rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -10).isActive = true
+    imgViews[5].trailingAnchor.constraint(equalTo: self.innerView.trailingAnchor, constant: -10).isActive = true
     imgViews[6].centerYAnchor.constraint(equalTo: imgViews[3].centerYAnchor).isActive = true
-    imgViews[6].rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -10).isActive = true
+    imgViews[6].trailingAnchor.constraint(equalTo: self.innerView.trailingAnchor, constant: -10).isActive = true
     
     for i in 0...6 {
       imgViews[i].widthAnchor.constraint(equalToConstant: 150).isActive = true
