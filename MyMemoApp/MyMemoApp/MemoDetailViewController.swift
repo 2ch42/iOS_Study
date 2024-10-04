@@ -16,7 +16,7 @@ class MemoDetailViewController: UIViewController {
   
   var afterUnload: (MemoDummies?, String) -> () = { memo, content in }
   
-  lazy var menuItems: [UIAction] = MenuItems.detailMenuItems
+  lazy var menuItems: [UIMenuElement] = MenuItems.detailMenuItems
   
   lazy var menu: UIMenu = UIMenu(title: "", options: [], children: menuItems)
   
@@ -68,9 +68,7 @@ class MemoDetailViewController: UIViewController {
       return
     })
     
-    let menu3 = UIMenu(title: "첨부 파일 보기", image: UIImage(systemName: "rectangle.3.group"), children: [subAction1, subAction2])
-    
-    self.menu = UIMenu(title: "", options: [], children: [menuItems[0], menuItems[1], menuItems[2], menu3, menuItems[4], menuItems[5]])
+    menuItems[3] = UIMenu(title: "첨부 파일 보기", image: UIImage(systemName: "rectangle.3.group"), children: [subAction1, subAction2])
     
     let backgroundActionTitle: String
     let backgroundActionImage: UIImage?
