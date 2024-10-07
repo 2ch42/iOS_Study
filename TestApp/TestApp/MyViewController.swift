@@ -1,30 +1,42 @@
-//
-//  ViewController.swift
-//  TestApp
-//
-//  Created by ch on 10/6/24.
-//
-
 import UIKit
 
 class MyViewController: UIViewController {
   
   var list: [TestModel] = TestModel.sampleData
+  var extendedList: [TestModel] = []
   
   private let collectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
+    let layout = MyViewController.layout()
     let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
     cv.translatesAutoresizingMaskIntoConstraints = false
     return cv
   }()
   
+  enum Section {
+    case main
+  }
+  
+  typealias Item = TestModel
+  
+  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+  
+  var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    for i in 0...2 {
+      var tmp = list
+      if i != 2 {
+        for j in 0..<list.count {
+          tmp[j].id = UUID()
+        }
+      }
+      extendedList += tmp
+    }
     
     self.view.addSubview(collectionView)
+    
+    collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.reuseIdentifer)
     
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -33,28 +45,42 @@ class MyViewController: UIViewController {
       collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
     ])
     
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    collectionView.register(MyCell.self, forCellWithReuseIdentifier: "MyCell")
-  }
-}
-
-extension MyViewController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseIdentifer, for: indexPath) as? MyCell else {
-      return UICollectionViewCell()
-    }
-    cell.configure(list[indexPath.item])
-    return cell
+//    collectionView.delegate = self
+    
+    dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseIdentifer, for: indexPath) as? MyCell else {
+        return nil
+      }
+      cell.configure(item)
+      return cell
+    })
+    
+    snapshot.appendSections([.main])
+    snapshot.appendItems(extendedList, toSection: .main)
+    dataSource.apply(snapshot)
+    
+//    collectionView.collectionViewLayout = layout()
   }
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return list.count
+  static func layout() -> UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
+    section.orthogonalScrollingBehavior = .groupPagingCentered
+    
+    let layout = UICollectionViewCompositionalLayout(section: section)
+    return layout
   }
 }
 
-extension MyViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.bounds.width, height: 100)
+extension MyViewController: UIScrollViewDelegate {
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    let index = Int(scrollView.contentOffset.x/scrollView.bounds.width)
+    print(index)
   }
 }

@@ -28,18 +28,18 @@ class MyCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.contentView.translatesAutoresizingMaskIntoConstraints = false
     self.contentView.addSubview(myLabel)
     self.contentView.addSubview(imageView)
     
     NSLayoutConstraint.activate([
       self.myLabel.topAnchor.constraint(greaterThanOrEqualTo: self.contentView.topAnchor, constant: 10),
-      self.myLabel.leadingAnchor.constraint(greaterThanOrEqualTo: self.contentView.leadingAnchor, constant: 10),
-      self.myLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.contentView.trailingAnchor, constant: -10),
-      self.imageView.bottomAnchor.constraint(greaterThanOrEqualTo: self.contentView.bottomAnchor, constant: -10),
-      self.imageView.topAnchor.constraint(greaterThanOrEqualTo: self.myLabel.bottomAnchor, constant: 10),
+      self.myLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
+      self.myLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+      self.imageView.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -10),
+
+      self.imageView.topAnchor.constraint(equalTo: self.myLabel.bottomAnchor, constant: 10),
       self.imageView.leadingAnchor.constraint(equalTo: self.myLabel.leadingAnchor),
-      self.imageView.trailingAnchor.constraint(greaterThanOrEqualTo: self.myLabel.trailingAnchor)
+      self.imageView.trailingAnchor.constraint(equalTo: self.myLabel.trailingAnchor),
     ])
   }
   
@@ -49,10 +49,8 @@ class MyCell: UICollectionViewCell {
   
   func configure(_ testModel: TestModel) {
     self.myLabel.text = testModel.labelString
-    self.imageView.image = UIImage(systemName: testModel.imageString)
+    self.imageView.image = UIImage(systemName: testModel.imageString)?.withRenderingMode(.automatic)
     self.backgroundColor = testModel.color
     self.contentView.backgroundColor = testModel.color
-    print(self.frame.width, self.frame.height)
-    print(self.contentView.frame.width, self.contentView.frame.height)
   }
 }
