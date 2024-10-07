@@ -62,6 +62,8 @@ class LineGridViewController: UIViewController {
     }
   }
   
+  //collectionView 로 계속 도는 뷰 만들기 세로로도 한
+  
   @objc func quitModalAction() {
     dismiss(animated: true)
   }
