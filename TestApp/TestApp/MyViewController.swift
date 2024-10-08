@@ -1,8 +1,7 @@
 import UIKit
 
 class MyViewController: UIViewController {
-  
-  var list: [TestModel] = TestModel.sampleData
+    var list: [TestModel] = TestModel.sampleData
   var extendedList: [TestModel] = []
   
   private let collectionView: UICollectionView = {
@@ -45,7 +44,7 @@ class MyViewController: UIViewController {
       collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
     ])
     
-//    collectionView.delegate = self
+    collectionView.delegate = self
     
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseIdentifer, for: indexPath) as? MyCell else {
@@ -59,7 +58,7 @@ class MyViewController: UIViewController {
     snapshot.appendItems(extendedList, toSection: .main)
     dataSource.apply(snapshot)
     
-//    collectionView.collectionViewLayout = layout()
+    collectionView.collectionViewLayout = MyViewController.layout()
   }
   
   static func layout() -> UICollectionViewCompositionalLayout {
@@ -74,11 +73,12 @@ class MyViewController: UIViewController {
     section.orthogonalScrollingBehavior = .groupPagingCentered
     
     let layout = UICollectionViewCompositionalLayout(section: section)
+    layout.configuration.scrollDirection = .horizontal
     return layout
   }
 }
 
-extension MyViewController: UIScrollViewDelegate {
+extension MyViewController: UICollectionViewDelegate {
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let index = Int(scrollView.contentOffset.x/scrollView.bounds.width)
     print(index)
