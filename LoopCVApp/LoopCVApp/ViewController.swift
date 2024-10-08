@@ -18,9 +18,18 @@ class ViewController: UIViewController {
   }()
 
   var list: [TestModel] = TestModel.sampleData
+  var extendedList: [TestModel] = []
     
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    for i in 0...2 {
+      for j in 0..<list.count {
+        var newElement = list[j]
+        if i != 0 { newElement.id = UUID() }
+        extendedList.append(newElement)
+      }
+    }
 
     self.view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +52,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return list.count
+    return extendedList.count
   }
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -54,7 +63,7 @@ extension ViewController: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier, for: indexPath) as? CollectionViewCell else {
       return UICollectionViewCell()
     }
-    cell.configure(list[indexPath.item])
+    cell.configure(extendedList[indexPath.item])
     return cell
   }
 }
@@ -74,7 +83,18 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: UIScrollViewDelegate {
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    print (scrollView.contentOffset.x)
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    let pageWidth = scrollView.frame.width
+    let offset = scrollView.contentOffset.x
+    let currentPage = Int(offset / pageWidth)
+
+    if currentPage >= extendedList.count - 1 {
+      collectionView.setContentOffset(CGPoint(x: 2 * pageWidth, y: 0), animated: false)
+    }
+    
+    if currentPage <= 0 {
+      collectionView.setContentOffset(CGPoint(x: 3 * pageWidth, y: 0), animated: false)
+    }
   }
 }
