@@ -45,7 +45,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vtQ-lc-rr8">
                                                     <rect key="frame" x="0.0" y="5" width="361" height="143"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMt-2r-4AW">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMt-2r-4AW">
                                                             <rect key="frame" x="15" y="9.9999999999999982" width="331" height="20.333333333333329"/>
                                                             <string key="text">Those six teams will be pre-drawn to determine whether they’ll be at home or away for the third round, and slotted separately into the first six ties. Then when the main draw gets underway, teams from pot 2 will be paired with one European team to complete the first six ties, and then the remaining 10 will be drawn from the rest of the teams in pot 2.</string>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -53,7 +53,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2023.09.06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X28-A3-tXH">
-                                                            <rect key="frame" x="15" y="35.333333333333336" width="331" height="17"/>
+                                                            <rect key="frame" x="15" y="35.333333333333336" width="331" height="97.666666666666657"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                                     <color key="backgroundColor" red="0.16835132087628868" green="0.16835132087628868" blue="0.16835132087628868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="X28-A3-tXH" secondAttribute="trailing" constant="15" id="1hS-kO-6OL"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X28-A3-tXH" secondAttribute="bottom" constant="10" id="2M2-cc-6yT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="X28-A3-tXH" secondAttribute="bottom" constant="10" id="2M2-cc-6yT"/>
                                                         <constraint firstItem="X28-A3-tXH" firstAttribute="leading" secondItem="vtQ-lc-rr8" secondAttribute="leading" constant="15" id="5Hm-q8-OG4"/>
                                                         <constraint firstItem="AMt-2r-4AW" firstAttribute="top" secondItem="vtQ-lc-rr8" secondAttribute="top" constant="10" id="PpV-8G-GWK"/>
                                                         <constraint firstAttribute="trailing" secondItem="AMt-2r-4AW" secondAttribute="trailing" constant="15" id="Ptr-ht-Hjm"/>

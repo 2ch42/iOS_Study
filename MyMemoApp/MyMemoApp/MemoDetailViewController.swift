@@ -88,7 +88,7 @@ class MemoDetailViewController: UIViewController {
       self.view.addSubview(completeButton)
       
       searchBar.translatesAutoresizingMaskIntoConstraints = false
-      self.textView.isFindInteractionEnabled = true
+      self.textView.isFindInteractionEnabled = false
       
       NSLayoutConstraint.activate([
         nextButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),

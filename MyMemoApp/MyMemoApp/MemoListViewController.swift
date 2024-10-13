@@ -128,8 +128,6 @@ class MemoListViewController: UIViewController {
     willUpdateMemo[0].content = content
     
     try? context.save()
-    
-    self.tableView.reloadData()
   }
   
   func deleteData(_ memo: MemoDummies) {
@@ -141,8 +139,6 @@ class MemoListViewController: UIViewController {
     context.delete(willDeleteMemo[0])
     
     try? context.save()
-    
-    self.tableView.reloadData()
   }
 }
 
@@ -211,6 +207,7 @@ extension MemoListViewController: UITableViewDelegate {
         self.tableView.reloadData()
       }
       self.isFiltered = false
+      self.tableView.reloadData()
     }
   }
 }
