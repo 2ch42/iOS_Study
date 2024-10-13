@@ -25,7 +25,7 @@ class MemoCell: UITableViewCell {
   }
   
   func configure(_ memo: MemoDummies) {
-    self.dateLabel.text = memo.date!.formatted()
+    self.dateLabel.text = (memo.updateDate?.formatted()) ?? ""
     self.descriptionLabel.text = memo.content
   }
 }

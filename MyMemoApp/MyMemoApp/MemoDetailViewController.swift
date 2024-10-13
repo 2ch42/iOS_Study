@@ -22,6 +22,34 @@ class MemoDetailViewController: UIViewController {
   
   var isBackgroundBlack: Bool = false
   
+  var searchBar = UISearchBar()
+  
+  var prevButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+    button.tintColor = .white
+    return button
+  }()
+
+  var nextButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+    button.tintColor = .white
+    return button
+  }()
+  
+  var completeButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("완료", for: .normal)
+    button.titleLabel?.numberOfLines = 1
+    button.titleLabel?.font.withSize(3)
+    button.tintColor = .white
+    return button
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -32,7 +60,7 @@ class MemoDetailViewController: UIViewController {
     let detailOptionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: nil)
     
     self.setMenuItems()
-    
+
     detailOptionButton.menu = menu
     
     navigationItem.rightBarButtonItems = [detailOptionButton, shareButton]
@@ -46,6 +74,43 @@ class MemoDetailViewController: UIViewController {
   }
   
   func setMenuItems() {
+    
+    menuItems[0] = UIAction(title: "메모에서 찾기", image: UIImage(systemName: "magnifyingglass"), handler: { [weak self] UIAction in
+
+      guard let self = self else { return }
+      
+      searchBar.isHidden = false
+      searchBar.delegate = self
+      
+      self.view.addSubview(searchBar)
+      self.view.addSubview(prevButton)
+      self.view.addSubview(nextButton)
+      self.view.addSubview(completeButton)
+      
+      searchBar.translatesAutoresizingMaskIntoConstraints = false
+      self.textView.isFindInteractionEnabled = true
+      
+      NSLayoutConstraint.activate([
+        nextButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+        nextButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        nextButton.heightAnchor.constraint(equalToConstant: 60),
+        nextButton.widthAnchor.constraint(equalToConstant: 35),
+        prevButton.heightAnchor.constraint(equalTo: nextButton.heightAnchor),
+        prevButton.widthAnchor.constraint(equalTo: nextButton.widthAnchor),
+        prevButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        prevButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor),
+        searchBar.trailingAnchor.constraint(equalTo: self.prevButton.leadingAnchor),
+        searchBar.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        searchBar.heightAnchor.constraint(equalToConstant: 60),
+        searchBar.leadingAnchor.constraint(equalTo: completeButton.trailingAnchor),
+        completeButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+        completeButton.heightAnchor.constraint(equalTo: nextButton.heightAnchor),
+        completeButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        completeButton.widthAnchor.constraint(equalToConstant: 50)
+      ])
+      
+      searchBar.becomeFirstResponder()
+    })
     
     menuItems[2] = UIAction(title: "줄 및 격자", image: UIImage(systemName: "rectangle.split.3x3"), handler: { [weak self] _ in
 
@@ -123,5 +188,24 @@ class MemoDetailViewController: UIViewController {
     self.navigationController?.navigationBar.backgroundColor = .black
 
     afterUnload(memo, self.textView.text)
+  }
+}
+
+extension MemoDetailViewController: UISearchBarDelegate {
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    searchBar.text = ""
+    searchBar.isHidden = true
+    self.textView.isFindInteractionEnabled = false
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchBar.text = ""
+
   }
 }

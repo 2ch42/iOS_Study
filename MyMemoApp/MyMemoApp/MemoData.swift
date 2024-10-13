@@ -7,3 +7,12 @@
 //
 import Foundation
 import CoreData
+
+extension MemoDummies: Comparable {
+  public static func < (lhs: MemoDummies, rhs: MemoDummies) -> Bool {
+    guard let lhsDate = lhs.updateDate else { fatalError("no update date")}
+    guard let rhsDate = rhs.updateDate else { fatalError("no update date")}
+    
+    if lhsDate < rhsDate { return false } else { return true }
+  }
+}

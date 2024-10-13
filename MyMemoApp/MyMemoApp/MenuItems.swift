@@ -22,7 +22,8 @@ struct MenuItems {
     return
   })]
 
-  static var detailMenuItems: [UIAction] = [UIAction(title: "메모에서 찾기", image: UIImage(systemName: "magnifyingglass"), handler: { UIAction in
+  static var detailMenuItems: [UIAction] = [
+    UIAction(title: "메모에서 찾기", image: UIImage(systemName: "magnifyingglass"), handler: { UIAction in
     return
   }), UIAction(title: "메모 이동", image: UIImage(systemName: "folder"), handler: { UIAction in
     return

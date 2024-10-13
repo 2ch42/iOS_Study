@@ -34,11 +34,7 @@ class MemoListViewController: UIViewController {
     super.viewDidLoad()
     
     list = readData()
-    //        list.sort { lhs, rhs in
-    //            return rhs.date! < lhs.date!
-    //        }
-    
-    
+
     tableView.translatesAutoresizingMaskIntoConstraints = false
     toolBar.translatesAutoresizingMaskIntoConstraints = false
     
@@ -91,6 +87,7 @@ class MemoListViewController: UIViewController {
         memoCountsText.title = "\(self.list.count)개의 메모"
       }
       self.isFiltered = false
+      self.tableView.reloadData()
     }
   }
   
@@ -100,7 +97,8 @@ class MemoListViewController: UIViewController {
     let newMemo = MemoDummies(context: context)
     
     newMemo.id = UUID()
-    newMemo.date = Date()
+    newMemo.createDate = Date()
+    newMemo.updateDate = Date()
     newMemo.content = content
     
     try? context.save()
@@ -113,7 +111,7 @@ class MemoListViewController: UIViewController {
     let request = MemoDummies.fetchRequest()
     
     guard let memoList = try? context.fetch(request) else { return [] }
-    return memoList
+    return memoList.sorted()
   }
   
   func updateData(_ memo: MemoDummies, _ content: String) {
@@ -125,22 +123,26 @@ class MemoListViewController: UIViewController {
     guard let memos = try? context.fetch(request) else { return }
     
     let willUpdateMemo = memos.filter({ $0.id == memo.id })
-    
-    willUpdateMemo[0].date = Date()
+
+    willUpdateMemo[0].updateDate = Date()
     willUpdateMemo[0].content = content
     
     try? context.save()
+    
+    self.tableView.reloadData()
   }
   
   func deleteData(_ memo: MemoDummies) {
     
     guard let context = self.persistentContainer?.viewContext else { return }
     
-    let willDeleteMemo = list.filter({ $0.date == memo.date && $0.content == memo.content })
+    let willDeleteMemo = list.filter({ $0.id == memo.id })
     
     context.delete(willDeleteMemo[0])
     
     try? context.save()
+    
+    self.tableView.reloadData()
   }
 }
 
@@ -202,9 +204,11 @@ extension MemoListViewController: UITableViewDelegate {
           memoCountsText.title = "\(list.count)개의 메모"
         }
       } else {
-        updateData(memo!, content)
+        if memo?.content != content {
+          updateData(memo!, content)
+        }
         list = readData()
-        self.tableView.reloadRows(at: [indexPath], with: .none)
+        self.tableView.reloadData()
       }
       self.isFiltered = false
     }
