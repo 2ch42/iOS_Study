@@ -10,7 +10,8 @@ import UIKit
 
 struct MenuItems {
 
-  static var listMenuItems: [UIAction] = [UIAction(title: "갤러리로 보기", image: UIImage(systemName: "square.grid.2x2"), handler: { UIAction in
+  static var listMenuItems: [UIAction] = [
+    UIAction(title: "갤러리로 보기", image: UIImage(systemName: "square.grid.2x2"), handler: { UIAction in
     return
   }), UIAction(title: "메모 선택", image: UIImage(systemName: "checkmark.circle"), handler: { UIAction in
     return

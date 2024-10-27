@@ -26,7 +26,7 @@ class MemoListViewController: UIViewController {
   
   @Published var isFiltered: Bool = false
   
-  lazy var menuItems: [UIAction] = MenuItems.listMenuItems
+  lazy var menuItems: [UIMenuElement] = MenuItems.listMenuItems
   
   lazy var menu: UIMenu = UIMenu(title: "", options: [], children: menuItems)
   
@@ -34,7 +34,7 @@ class MemoListViewController: UIViewController {
     super.viewDidLoad()
     
     list = readData()
-
+    
     tableView.translatesAutoresizingMaskIntoConstraints = false
     toolBar.translatesAutoresizingMaskIntoConstraints = false
     
@@ -51,23 +51,12 @@ class MemoListViewController: UIViewController {
     
     let listOptionButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: nil)
     
+    self.setMenuItems()
+    
     listOptionButton.menu = menu
     navigationItem.rightBarButtonItem = listOptionButton
     
-    
-    let newMemoButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(addNewItem))
-    
-    let toolBarSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-    
-    let memoCountsText = UIBarButtonItem(title: "\(list.count)개의 메모", style: .plain, target: self, action: nil)
-    
-    memoCountsText.tintColor = .white
-    
-    toolBar.tintColor = .systemYellow
-    toolBar.isTranslucent = false
-    toolBar.barTintColor = .black
-    toolBar.backgroundColor = .black
-    toolBar.setItems([toolBarSpace, memoCountsText, toolBarSpace, newMemoButton], animated: true)
+    setToolbar(true)
   }
   
   @objc func addNewItem() {
@@ -89,6 +78,37 @@ class MemoListViewController: UIViewController {
       self.isFiltered = false
       self.tableView.reloadData()
     }
+  }
+
+  func setToolbar(_ isDefault: Bool) {
+    if isDefault {
+      let newMemoButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(addNewItem))
+      
+      let toolBarSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+      
+      let memoCountsText = UIBarButtonItem(title: "\(list.count)개의 메모", style: .plain, target: self, action: nil)
+      
+      memoCountsText.tintColor = .white
+      
+      toolBar.tintColor = .systemYellow
+      toolBar.isTranslucent = false
+      toolBar.barTintColor = .black
+      toolBar.backgroundColor = .black
+      toolBar.setItems([toolBarSpace, memoCountsText, toolBarSpace, newMemoButton], animated: true)
+    }
+  }
+  
+  func setMenuItems() {
+    menuItems[0] = UIAction(title: "메모 선택", image: UIImage(systemName: "checkmark.circle"), handler: { [weak self] UIAction in
+      
+      guard let self = self else { return }
+      
+      self.tableView.allowsMultipleSelection = true
+      
+      // 관련 작업들 수행-> delegate에서 다 처리해줘야할지는 좀 더 알아봐야함.
+      
+      return
+    })
   }
   
   func createData(_ content: String) {
@@ -123,7 +143,7 @@ class MemoListViewController: UIViewController {
     guard let memos = try? context.fetch(request) else { return }
     
     let willUpdateMemo = memos.filter({ $0.id == memo.id })
-
+    
     willUpdateMemo[0].updateDate = Date()
     willUpdateMemo[0].content = content
     
@@ -145,12 +165,12 @@ class MemoListViewController: UIViewController {
 extension MemoListViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell else {
       print("Failed casting to MemoCell")
       return UITableViewCell()
     }
-    
+
     isFiltered ? cell.configure(filteredList[indexPath.item]) : cell.configure(list[indexPath.item])
     return cell
   }
@@ -210,6 +230,19 @@ extension MemoListViewController: UITableViewDelegate {
       self.tableView.reloadData()
     }
   }
+  
+  func tableView(_ tableView: UITableView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+    // button 보여지게
+    return true
+  }
+
+  func tableViewDidEndMultipleSelectionInteraction(_ tableView: UITableView) {
+    list = readData()
+
+    setToolbar(true)
+
+    tableView.reloadData()
+  }
 }
 
 extension MemoListViewController: UISearchBarDelegate {
@@ -232,6 +265,7 @@ extension MemoListViewController: UISearchBarDelegate {
   }
   
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
     self.tableView.reloadData()
   }
   

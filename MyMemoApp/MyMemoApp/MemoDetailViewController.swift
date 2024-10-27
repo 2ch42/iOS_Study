@@ -9,21 +9,21 @@ import UIKit
 import CoreData
 
 class MemoDetailViewController: UIViewController {
-  
+
   @IBOutlet weak var textView: UITextView!
-  
+
   var memo: MemoDummies? = nil
-  
+
   var afterUnload: (MemoDummies?, String) -> () = { memo, content in }
-  
+
   lazy var menuItems: [UIMenuElement] = MenuItems.detailMenuItems
-  
+
   lazy var menu: UIMenu = UIMenu(title: "", options: [], children: menuItems)
-  
+
   var isBackgroundBlack: Bool = false
-  
+
   var searchBar = UISearchBar()
-  
+
   var prevButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class MemoDetailViewController: UIViewController {
     button.tintColor = .white
     return button
   }()
-  
+
   var completeButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,10 +49,10 @@ class MemoDetailViewController: UIViewController {
     button.tintColor = .white
     return button
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     textView.text = memo?.content ?? ""
     
     let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareMemo))
@@ -62,34 +62,34 @@ class MemoDetailViewController: UIViewController {
     self.setMenuItems()
 
     detailOptionButton.menu = menu
-    
+
     navigationItem.rightBarButtonItems = [detailOptionButton, shareButton]
   }
-  
+
   @objc func shareMemo() {
     guard let memoText = self.textView.text else { return }
     
     let activityVC = UIActivityViewController(activityItems: [memoText], applicationActivities: nil)
     present(activityVC, animated: true, completion: nil)
   }
-  
+
   func setMenuItems() {
     
     menuItems[0] = UIAction(title: "메모에서 찾기", image: UIImage(systemName: "magnifyingglass"), handler: { [weak self] UIAction in
 
       guard let self = self else { return }
-      
+
       searchBar.isHidden = false
       searchBar.delegate = self
-      
+
       self.view.addSubview(searchBar)
       self.view.addSubview(prevButton)
       self.view.addSubview(nextButton)
       self.view.addSubview(completeButton)
-      
+
       searchBar.translatesAutoresizingMaskIntoConstraints = false
       self.textView.isFindInteractionEnabled = false
-      
+
       NSLayoutConstraint.activate([
         nextButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
         nextButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
@@ -108,12 +108,12 @@ class MemoDetailViewController: UIViewController {
         completeButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         completeButton.widthAnchor.constraint(equalToConstant: 50)
       ])
-      
+
       searchBar.becomeFirstResponder()
     })
     
     menuItems[2] = UIAction(title: "줄 및 격자", image: UIImage(systemName: "rectangle.split.3x3"), handler: { [weak self] _ in
-
+      
       guard let self = self else {
         return
       }
@@ -128,7 +128,7 @@ class MemoDetailViewController: UIViewController {
     let subAction1 = UIAction(title: "모두 작게 설정", handler: { UIAction in
       return
     })
-    
+
     let subAction2 = UIAction(title: "모두 작게 설정", handler: { UIAction in
       return
     })
@@ -137,7 +137,7 @@ class MemoDetailViewController: UIViewController {
     
     let backgroundActionTitle: String
     let backgroundActionImage: UIImage?
-    
+
     if self.textView.backgroundColor == .black {
       backgroundActionTitle = "밝은 배경 사용"
       backgroundActionImage = UIImage(systemName: "circle.lefthalf.filled")
@@ -145,8 +145,7 @@ class MemoDetailViewController: UIViewController {
       backgroundActionTitle = "어두운 배경 사용"
       backgroundActionImage = UIImage(systemName: "circle.righthalf.filled")
     }
-    
-    // 배경 색 변경 액션
+
     let backgroundAction = UIAction(title: backgroundActionTitle, image: backgroundActionImage) { [weak self] _ in
       guard let self = self else { return }
       if self.textView.backgroundColor == .black {
@@ -162,9 +161,9 @@ class MemoDetailViewController: UIViewController {
       }
       self.setMenuItems()
     }
-    
+
     menuItems[4] = backgroundAction
-    
+
     menuItems[5] = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { [weak self] _ in
       if let self = self {
         self.textView.text = ""
@@ -174,17 +173,17 @@ class MemoDetailViewController: UIViewController {
       }
     })
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
-    
+
     super.viewWillDisappear(animated)
-    
+
     if self.textView.text == "" {
       if memo != nil {
         memo!.content = self.textView.text
       }
     }
-    
+
     self.navigationController?.navigationBar.backgroundColor = .black
 
     afterUnload(memo, self.textView.text)
@@ -192,20 +191,19 @@ class MemoDetailViewController: UIViewController {
 }
 
 extension MemoDetailViewController: UISearchBarDelegate {
-  
+
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
     searchBar.text = ""
     searchBar.isHidden = true
     self.textView.isFindInteractionEnabled = false
   }
-  
+
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     
   }
-  
+
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     searchBar.text = ""
-
   }
 }
