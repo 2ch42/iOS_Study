@@ -11,7 +11,7 @@ class TimerViewController: UIViewController {
   
   let pickerView = UIPickerView()
   
-  let label: UILabel = {
+  let minuteLabel: UILabel = {
     let label = UILabel()
     label.backgroundColor = .darkGray
     label.clipsToBounds = true
@@ -23,6 +23,30 @@ class TimerViewController: UIViewController {
     label.numberOfLines = 1
     return label
   }()
+  
+  let startButton: UIButton = {
+    let button = UIButton()
+    button.addTarget(self, action: #selector(updateTime), for: .touchUpInside)
+    button.addTarget(self, action: #selector(updateBgColor), for: .touchDown)
+    button.setTitle("시작", for: .normal)
+    button.setTitleColor(.black, for: .normal)
+    button.backgroundColor = .white
+    button.layer.cornerRadius = 25
+    return button
+  }()
+  
+  @objc func updateTime() {
+    self.chosenTime = self.selectedTime
+    if let chosenTime = self.chosenTime { print("chosenTime: \(chosenTime)") }
+    self.startButton.backgroundColor = .white
+  }
+  
+  @objc func updateBgColor() {
+    startButton.backgroundColor = .darkGray
+  }
+  
+  var selectedTime: Int? = 5
+  var chosenTime: Int? = 5
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,18 +70,24 @@ class TimerViewController: UIViewController {
     
     // Auto Layout
     self.view.addSubview(pickerView)
-    self.view.addSubview(label)
+    self.view.addSubview(minuteLabel)
+    self.view.addSubview(startButton)
     pickerView.translatesAutoresizingMaskIntoConstraints = false
-    label.translatesAutoresizingMaskIntoConstraints = false
+    minuteLabel.translatesAutoresizingMaskIntoConstraints = false
+    startButton.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       pickerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-      pickerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+      pickerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -100),
       pickerView.widthAnchor.constraint(equalToConstant: self.view.frame.width - 100),
       pickerView.heightAnchor.constraint(equalToConstant: 300),
-      label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-      label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-      label.widthAnchor.constraint(equalToConstant: self.view.frame.width - 100),
-      label.heightAnchor.constraint(equalToConstant: 35)
+      minuteLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+      minuteLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -100),
+      minuteLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width - 100),
+      minuteLabel.heightAnchor.constraint(equalToConstant: 35),
+      startButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+      startButton.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: 80),
+      startButton.widthAnchor.constraint(equalToConstant: 140),
+      startButton.heightAnchor.constraint(equalToConstant: 50)
     ])
     self.view.bringSubviewToFront(pickerView)
   }
@@ -85,5 +115,10 @@ extension TimerViewController: UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     return NSAttributedString(string: "\(row * 5 + 5)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    self.selectedTime = row * 5 + 5
+    if let selectedTime = self.selectedTime { print("selectedTime: \(selectedTime)")}
   }
 }
