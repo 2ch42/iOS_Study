@@ -15,7 +15,6 @@ class TimerViewController: UIViewController {
     let label = UILabel()
     label.backgroundColor = .darkGray
     label.clipsToBounds = true
-    label.isOpaque = false
     label.text = "분 동안 "
     label.textAlignment = .right
     label.textColor = .white
