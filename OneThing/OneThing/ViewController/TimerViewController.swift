@@ -42,6 +42,9 @@ class TimerViewController: UIViewController {
     self.focusTimer = FocusTimer(timeSet: Int(exactly: setTime)!)
     self.startButton.backgroundColor = .white
     print(self.focusTimer)
+    let vc = FocusViewController()
+    vc.focusTimer = self.focusTimer
+    navigationController?.pushViewController(vc, animated: true)
   }
   
   @objc func updateBgColor() {

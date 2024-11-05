@@ -28,7 +28,7 @@ struct FocusTimer {
     let yearFormatter = DateFormatter()
     let monthFormatter = DateFormatter()
     let dayFormatter = DateFormatter()
-    
+
     yearFormatter.dateFormat = "yyyy"
     monthFormatter.dateFormat = "MM"
     dayFormatter.dateFormat = "dd"

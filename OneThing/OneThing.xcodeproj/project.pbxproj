@@ -18,6 +18,8 @@
 		E2BDA4272CCCC3A700A865F1 /* OneThingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4262CCCC3A700A865F1 /* OneThingUITestsLaunchTests.swift */; };
 		E2BDA4342CCCE41300A865F1 /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4332CCCE41300A865F1 /* AnalyzeViewController.swift */; };
 		E2BDA4362CCCE42200A865F1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4352CCCE42200A865F1 /* SettingViewController.swift */; };
+		E2FA65522CDA641700CA262F /* FocusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA65512CDA641700CA262F /* FocusViewController.swift */; };
+		E2FA65542CDA645000CA262F /* GoalModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FA65532CDA645000CA262F /* GoalModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		E2BDA4262CCCC3A700A865F1 /* OneThingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneThingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E2BDA4332CCCE41300A865F1 /* AnalyzeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeViewController.swift; sourceTree = "<group>"; };
 		E2BDA4352CCCE42200A865F1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E2FA65512CDA641700CA262F /* FocusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusViewController.swift; sourceTree = "<group>"; };
+		E2FA65532CDA645000CA262F /* GoalModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 				E2BDA4072CCCC3A600A865F1 /* TimerViewController.swift */,
 				E2BDA4332CCCE41300A865F1 /* AnalyzeViewController.swift */,
 				E2BDA4352CCCE42200A865F1 /* SettingViewController.swift */,
+				E2FA65512CDA641700CA262F /* FocusViewController.swift */,
+				E2FA65532CDA645000CA262F /* GoalModalViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -282,9 +288,11 @@
 				E2BDA4362CCCE42200A865F1 /* SettingViewController.swift in Sources */,
 				E2BDA4082CCCC3A600A865F1 /* TimerViewController.swift in Sources */,
 				E2BAD1B82CD785C400857513 /* FocusTimer.swift in Sources */,
+				E2FA65522CDA641700CA262F /* FocusViewController.swift in Sources */,
 				E2BDA4342CCCE41300A865F1 /* AnalyzeViewController.swift in Sources */,
 				E2BDA4042CCCC3A600A865F1 /* AppDelegate.swift in Sources */,
 				E2BDA4062CCCC3A600A865F1 /* SceneDelegate.swift in Sources */,
+				E2FA65542CDA645000CA262F /* GoalModalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
