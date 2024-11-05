@@ -36,8 +36,12 @@ class TimerViewController: UIViewController {
   
   @objc func updateTime() {
     self.chosenTime = self.selectedTime
-    if let chosenTime = self.chosenTime { print("chosenTime: \(chosenTime)") }
+    guard let setTime = self.chosenTime else {
+      return
+    }
+    self.focusTimer = FocusTimer(timeSet: Int(exactly: setTime)!)
     self.startButton.backgroundColor = .white
+    print(self.focusTimer)
   }
   
   @objc func updateBgColor() {
@@ -46,6 +50,7 @@ class TimerViewController: UIViewController {
   
   var selectedTime: Int? = 5
   var chosenTime: Int? = 5
+  var focusTimer: FocusTimer? = nil
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -118,6 +123,5 @@ extension TimerViewController: UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     self.selectedTime = row * 5 + 5
-    if let selectedTime = self.selectedTime { print("selectedTime: \(selectedTime)")}
   }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2BAD1B82CD785C400857513 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BAD1B72CD785C400857513 /* FocusTimer.swift */; };
 		E2BDA4042CCCC3A600A865F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4032CCCC3A600A865F1 /* AppDelegate.swift */; };
 		E2BDA4062CCCC3A600A865F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4052CCCC3A600A865F1 /* SceneDelegate.swift */; };
 		E2BDA4082CCCC3A600A865F1 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BDA4072CCCC3A600A865F1 /* TimerViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E2BAD1B72CD785C400857513 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
 		E2BDA4002CCCC3A600A865F1 /* OneThing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneThing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BDA4032CCCC3A600A865F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2BDA4052CCCC3A600A865F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E2BAD1B52CD784CC00857513 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2BAD1B72CD785C400857513 /* FocusTimer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E2BAD1B62CD784E100857513 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E2BDA4072CCCC3A600A865F1 /* TimerViewController.swift */,
+				E2BDA4332CCCE41300A865F1 /* AnalyzeViewController.swift */,
+				E2BDA4352CCCE42200A865F1 /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		E2BDA3F72CCCC3A600A865F1 = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +121,10 @@
 		E2BDA4022CCCC3A600A865F1 /* OneThing */ = {
 			isa = PBXGroup;
 			children = (
+				E2BAD1B62CD784E100857513 /* ViewController */,
+				E2BAD1B52CD784CC00857513 /* Model */,
 				E2BDA4032CCCC3A600A865F1 /* AppDelegate.swift */,
 				E2BDA4052CCCC3A600A865F1 /* SceneDelegate.swift */,
-				E2BDA4072CCCC3A600A865F1 /* TimerViewController.swift */,
-				E2BDA4332CCCE41300A865F1 /* AnalyzeViewController.swift */,
-				E2BDA4352CCCE42200A865F1 /* SettingViewController.swift */,
 				E2BDA40C2CCCC3A700A865F1 /* Assets.xcassets */,
 				E2BDA40E2CCCC3A700A865F1 /* LaunchScreen.storyboard */,
 				E2BDA4112CCCC3A700A865F1 /* Info.plist */,
@@ -262,6 +281,7 @@
 			files = (
 				E2BDA4362CCCE42200A865F1 /* SettingViewController.swift in Sources */,
 				E2BDA4082CCCC3A600A865F1 /* TimerViewController.swift in Sources */,
+				E2BAD1B82CD785C400857513 /* FocusTimer.swift in Sources */,
 				E2BDA4342CCCE41300A865F1 /* AnalyzeViewController.swift in Sources */,
 				E2BDA4042CCCC3A600A865F1 /* AppDelegate.swift in Sources */,
 				E2BDA4062CCCC3A600A865F1 /* SceneDelegate.swift in Sources */,
