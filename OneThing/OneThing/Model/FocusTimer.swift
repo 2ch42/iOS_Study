@@ -9,7 +9,7 @@ import Foundation
 
 struct FocusTimer {
   
-  var timeSet: Int
+  var targetMinute: Int
   
   var year: String
   
@@ -21,7 +21,7 @@ struct FocusTimer {
 
   init(timeSet: Int) {
 
-    self.timeSet = timeSet
+    self.targetMinute = timeSet
 
     let date = Date()
     

@@ -105,6 +105,8 @@ extension GoalModalViewController: UITextFieldDelegate {
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
+    if textField.text?.count == 0 { return false }
+    
     textField.resignFirstResponder()
     if let fieldText = textField.text {
       self.setGoal(fieldText)

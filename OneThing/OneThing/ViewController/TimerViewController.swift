@@ -22,7 +22,7 @@ class TimerViewController: UIViewController {
     label.numberOfLines = 1
     return label
   }()
-  
+
   let startButton: UIButton = {
     let button = UIButton()
     button.addTarget(self, action: #selector(updateTime), for: .touchUpInside)
