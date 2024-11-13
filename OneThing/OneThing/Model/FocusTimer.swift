@@ -18,7 +18,7 @@ struct FocusTimer {
   var day: String
   
   var success: Bool = false
-  
+
   init(timeSet: Int) {
 
     self.timeSet = timeSet
