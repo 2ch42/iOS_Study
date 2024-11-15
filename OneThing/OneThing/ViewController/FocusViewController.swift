@@ -35,10 +35,28 @@ class FocusViewController: UIViewController {
     return label
   }()
   
-  var timerLabel: UILabel = {
+  var colonLabel: UILabel = {
     var label = UILabel()
-    label.textAlignment = .center
-    label.attributedText = NSAttributedString(string: "00:00", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80), NSAttributedString.Key.foregroundColor: UIColor.white])
+    label.textAlignment = .left
+    label.attributedText = NSAttributedString(string: ":", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80), NSAttributedString.Key.foregroundColor: UIColor.white])
+    label.isHidden = true
+    label.isEnabled = false
+    return label
+  }()
+  
+  var minuteLabel: UILabel = {
+    var label = UILabel()
+    label.textAlignment = .left
+    label.attributedText = NSAttributedString(string: "00", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80), NSAttributedString.Key.foregroundColor: UIColor.white])
+    label.isHidden = true
+    label.isEnabled = false
+    return label
+  }()
+  
+  var secondLabel: UILabel = {
+    var label = UILabel()
+    label.textAlignment = .left
+    label.attributedText = NSAttributedString(string: "00", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80), NSAttributedString.Key.foregroundColor: UIColor.white])
     label.isHidden = true
     label.isEnabled = false
     return label
@@ -88,7 +106,9 @@ class FocusViewController: UIViewController {
     super.viewDidLoad()
     
     self.view.addSubview(countDownLabel)
-    self.view.addSubview(timerLabel)
+    self.view.addSubview(colonLabel)
+    self.view.addSubview(minuteLabel)
+    self.view.addSubview(secondLabel)
     self.view.addSubview(stopButton)
     self.view.addSubview(resumeButton)
     self.view.addSubview(quitButton)
@@ -97,7 +117,9 @@ class FocusViewController: UIViewController {
     self.navigationController?.navigationBar.isHidden = true
 
     countDownLabel.translatesAutoresizingMaskIntoConstraints = false
-    timerLabel.translatesAutoresizingMaskIntoConstraints = false
+    colonLabel.translatesAutoresizingMaskIntoConstraints = false
+    minuteLabel.translatesAutoresizingMaskIntoConstraints = false
+    secondLabel.translatesAutoresizingMaskIntoConstraints = false
     stopButton.translatesAutoresizingMaskIntoConstraints = false
     resumeButton.translatesAutoresizingMaskIntoConstraints = false
     quitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -107,22 +129,30 @@ class FocusViewController: UIViewController {
       countDownLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant:  -20),
       countDownLabel.widthAnchor.constraint(equalToConstant: 150),
       countDownLabel.heightAnchor.constraint(equalToConstant: 150),
-      timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-      timerLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -20),
-      timerLabel.widthAnchor.constraint(equalToConstant: 250),
-      timerLabel.heightAnchor.constraint(equalToConstant: 150),
+      colonLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+      colonLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+      colonLabel.widthAnchor.constraint(equalToConstant: 30),
+      colonLabel.heightAnchor.constraint(equalToConstant: 150),
+      minuteLabel.centerYAnchor.constraint(equalTo: colonLabel.centerYAnchor),
+      minuteLabel.trailingAnchor.constraint(equalTo: colonLabel.leadingAnchor),
+      minuteLabel.widthAnchor.constraint(equalToConstant: 110),
+      minuteLabel.heightAnchor.constraint(equalToConstant: 150),
+      secondLabel.centerYAnchor.constraint(equalTo: colonLabel.centerYAnchor),
+      secondLabel.leadingAnchor.constraint(equalTo: colonLabel.trailingAnchor),
+      secondLabel.widthAnchor.constraint(equalToConstant: 110),
+      secondLabel.heightAnchor.constraint(equalToConstant: 150),
       stopButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -80),
-      stopButton.widthAnchor.constraint(equalToConstant: 120),
+      stopButton.widthAnchor.constraint(equalToConstant: 125),
       stopButton.heightAnchor.constraint(equalToConstant: 50),
-      stopButton.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 150),
+      stopButton.topAnchor.constraint(equalTo: colonLabel.bottomAnchor, constant: 180),
       resumeButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -80),
-      resumeButton.widthAnchor.constraint(equalToConstant: 120),
+      resumeButton.widthAnchor.constraint(equalToConstant: 125),
       resumeButton.heightAnchor.constraint(equalToConstant: 50),
-      resumeButton.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 150),
+      resumeButton.topAnchor.constraint(equalTo: colonLabel.bottomAnchor, constant: 180),
       quitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 80),
-      quitButton.widthAnchor.constraint(equalToConstant: 120),
+      quitButton.widthAnchor.constraint(equalToConstant: 125),
       quitButton.heightAnchor.constraint(equalToConstant: 50),
-      quitButton.topAnchor.constraint(equalTo: timerLabel.bottomAnchor, constant: 150),
+      quitButton.topAnchor.constraint(equalTo: colonLabel.bottomAnchor, constant: 180),
     ])
 
   }
@@ -181,8 +211,12 @@ class FocusViewController: UIViewController {
       timer?.invalidate()
       self.countDownLabel.isHidden = true
       self.countDownLabel.isEnabled = false
-      self.timerLabel.isHidden = false
-      self.timerLabel.isEnabled = true
+      self.colonLabel.isHidden = false
+      self.colonLabel.isEnabled = true
+      self.minuteLabel.isHidden = false
+      self.minuteLabel.isEnabled = true
+      self.secondLabel.isHidden = false
+      self.secondLabel.isEnabled = true
       startTargetTimer()
     } else {
       self.countDownLabel.text = "\(runCount)"
@@ -206,7 +240,9 @@ class FocusViewController: UIViewController {
     if secondText.count == 1 {
       secondText = "0" + secondText
     }
-    self.timerLabel.text = "\(minuteText):\(secondText)"
+
+    self.minuteLabel.text = minuteText
+    self.secondLabel.text = secondText
     
     if self.minute == self.targetMinute {
       timer?.invalidate()
